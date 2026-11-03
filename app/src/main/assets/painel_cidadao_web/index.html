@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Cidadão | E.E. Professor Morais</title>
+  <!-- Tailwind CSS via CDN para visual limpo e acolhedor -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            govgreen: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            govblue: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    .card-shadow { box-shadow: 0 4px 16px -2px rgba(22, 101, 52, 0.08), 0 2px 6px -2px rgba(30, 64, 175, 0.05); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Cabeçalho Institucional Fixo -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-govgreen-700 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+          🌱
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-govgreen-700 bg-govgreen-50 px-2 py-0.5 rounded-md">Contabilidade Pública Social</span>
+            <span class="text-xs font-medium text-slate-500">PUC Minas · TEI 2026/2</span>
+          </div>
+          <h1 class="text-lg md:text-xl font-bold text-slate-900 leading-tight">Painel Cidadão: Merenda Sem Desperdício</h1>
+          <p class="text-xs text-slate-600">Escola Estadual Professor Morais</p>
+        </div>
+      </div>
+
+      <!-- Navegação Rápida -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-600">
+        <a href="#diagnostico" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Diagnóstico</a>
+        <a href="#evolucao" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Evolução</a>
+        <a href="#calculadora" class="px-2.5 py-1.5 rounded-lg bg-govgreen-100 text-govgreen-800 font-semibold hover:bg-govgreen-200 transition">Simulador</a>
+        <a href="#oportunidade" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Equivalência</a>
+        <a href="#kpis" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">KPIs</a>
+        <a href="#escala" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">100 Escolas</a>
+        <a href="#ods" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">ODS</a>
+      </nav>
+
+      <button onclick="document.getElementById('modal-equipe').classList.remove('hidden')" class="text-xs font-semibold text-govblue-700 bg-govblue-50 hover:bg-govblue-100 px-3 py-1.5 rounded-lg border border-govblue-200 transition">
+        👥 Equipe PUC Minas
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-10">
+
+    <!-- 1. SEÇÃO INÍCIO -->
+    <section class="bg-gradient-to-br from-emerald-800 via-govgreen-800 to-govblue-900 rounded-3xl p-6 md:p-10 text-white card-shadow relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Selo ODS 2 -->
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DDA63A] text-slate-900 shadow-sm">
+            🌾 ODS 2: Fome Zero
+          </span>
+          <!-- Selo ODS 12 -->
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#BF8B2E] text-slate-900 shadow-sm">
+            ♻️ ODS 12: Consumo Responsável
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white backdrop-blur">
+            🛡️ Premissa Atrito Zero
+          </span>
+        </div>
+
+        <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight leading-tight">
+          Quanto da merenda deixa de ser aproveitada e o que isso representa para a escola?
+        </h2>
+
+        <p class="text-emerald-100 text-sm md:text-base leading-relaxed">
+          Apresentamos à direção da <strong>Escola Estadual Professor Morais</strong> os resultados da auditoria piloto de desperdício alimentar, realizada com rigor contábil e foco em nutrição pública.
+        </p>
+
+        <!-- Destaque Atrito Zero -->
+        <div class="bg-white/10 backdrop-blur rounded-2xl p-4 border border-white/20 text-xs md:text-sm text-emerald-50">
+          <p class="font-semibold text-white mb-1">✨ Metodologia de Atrito Zero:</p>
+          Toda a coleta e pesagem da sobra limpa foram realizadas diretamente pelos estudantes de Ciências Contábeis da PUC Minas, utilizando balanças digitais próprias, sem gerar trabalho adicional para a direção, professores ou equipe da cantina.
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DIAGNÓSTICO DE 5 DIAS -->
+    <section id="diagnostico" class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-xl md:text-2xl font-bold text-slate-900">Diagnóstico de 5 Dias</h3>
+          <p class="text-xs md:text-sm text-slate-500">Período de auditoria presencial: <strong>5 a 9 de outubro de 2026</strong></p>
+        </div>
+        <span class="text-xs bg-slate-200 text-slate-700 px-2.5 py-1 rounded-lg font-medium">Amostra de 5 dias úteis</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Cartão 1: Sobra alimentar -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow relative">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Sobra Alimentar</span>
+            <span class="text-xl">⚖️</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 mb-1">61,60 <span class="text-lg font-bold text-slate-600">kg</span></div>
+          <p class="text-xs font-medium text-emerald-800 bg-emerald-50 inline-block px-2 py-0.5 rounded">Média de 12,32 kg por dia</p>
+          <p class="text-[11px] text-slate-500 mt-2">Sobra limpa aferida após o término do horário de intervalo.</p>
+        </div>
+
+        <!-- Cartão 2: Pratos equivalentes -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-700">Pratos Equivalentes</span>
+            <span class="text-xl">🍽️</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 mb-1">246,4 <span class="text-lg font-bold text-slate-600">pratos</span></div>
+          <p class="text-xs font-medium text-blue-800 bg-blue-50 inline-block px-2 py-0.5 rounded">Sobra ÷ 0,250 kg / prato</p>
+          <p class="text-[11px] text-amber-700 bg-amber-50 rounded p-1.5 mt-2 leading-tight">
+            ⚠️ <em>Estimativa teórica pelo peso médio de 250g; não são refeições servidas deixadas nas mesas.</em>
+          </p>
+        </div>
+
+        <!-- Cartão 3: Perda financeira -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-700">Perda Financeira</span>
+            <span class="text-xl">💰</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-rose-600 mb-1">R$ 1.145,76</div>
+          <p class="text-xs font-medium text-rose-800 bg-rose-50 inline-block px-2 py-0.5 rounded">246,4 pratos × R$ 4,65</p>
+          <p class="text-[11px] text-slate-500 mt-2">Custo unitário estimado do prato segundo referências do PNAE/FNDE.</p>
+        </div>
+
+        <!-- Cartão 4: Energia equivalente -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Energia Equivalente</span>
+            <span class="text-xl">⚡</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 mb-1">~86.240 <span class="text-lg font-bold text-slate-600">kcal</span></div>
+          <p class="text-xs font-medium text-amber-800 bg-amber-50 inline-block px-2 py-0.5 rounded">Pratos × 350 kcal</p>
+          <p class="text-[11px] text-slate-500 mt-2">Piso conservador da meta calórica para estudantes de Anos Iniciais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EVOLUÇÃO DIÁRIA -->
+    <section id="evolucao" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 card-shadow space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Evolução Diária da Sobra Limpa</h3>
+          <p class="text-xs md:text-sm text-slate-500">Comparativo dia a dia dos 5 dias de pesagem da amostra</p>
+        </div>
+        <div class="text-xs text-emerald-800 bg-emerald-50 font-semibold px-3 py-1 rounded-full self-start md:self-auto">
+          📉 Queda de ~51% do 1º ao 4º dia
+        </div>
+      </div>
+
+      <!-- Gráfico de Barras Customizado Responsivo -->
+      <div class="grid grid-cols-5 gap-2 md:gap-4 pt-6 pb-2 items-end h-64 border-b border-slate-200">
+        <!-- Dia 1 -->
+        <div class="flex flex-col items-center h-full justify-end group">
+          <span class="text-xs font-bold text-slate-700 mb-1">16,90 kg</span>
+          <span class="text-[10px] text-rose-600 font-semibold mb-1">R$ 314,34</span>
+          <div class="w-full max-w-[48px] bg-rose-500 hover:bg-rose-600 rounded-t-xl transition-all" style="height: 100%;"></div>
+          <span class="text-xs font-semibold text-slate-800 mt-2">Dia 1</span>
+          <span class="text-[10px] text-slate-400">05/10</span>
+        </div>
+        <!-- Dia 2 -->
+        <div class="flex flex-col items-center h-full justify-end group">
+          <span class="text-xs font-bold text-slate-700 mb-1">13,58 kg</span>
+          <span class="text-[10px] text-amber-600 font-semibold mb-1">R$ 252,68</span>
+          <div class="w-full max-w-[48px] bg-amber-500 hover:bg-amber-600 rounded-t-xl transition-all" style="height: 80.4%;"></div>
+          <span class="text-xs font-semibold text-slate-800 mt-2">Dia 2</span>
+          <span class="text-[10px] text-slate-400">06/10</span>
+        </div>
+        <!-- Dia 3 -->
+        <div class="flex flex-col items-center h-full justify-end group">
+          <span class="text-xs font-bold text-slate-700 mb-1">12,29 kg</span>
+          <span class="text-[10px] text-amber-600 font-semibold mb-1">R$ 228,59</span>
+          <div class="w-full max-w-[48px] bg-amber-400 hover:bg-amber-500 rounded-t-xl transition-all" style="height: 72.7%;"></div>
+          <span class="text-xs font-semibold text-slate-800 mt-2">Dia 3</span>
+          <span class="text-[10px] text-slate-400">07/10</span>
+        </div>
+        <!-- Dia 4 -->
+        <div class="flex flex-col items-center h-full justify-end group">
+          <span class="text-xs font-bold text-emerald-700 mb-1">8,31 kg</span>
+          <span class="text-[10px] text-emerald-600 font-semibold mb-1">R$ 154,66</span>
+          <div class="w-full max-w-[48px] bg-emerald-500 hover:bg-emerald-600 rounded-t-xl transition-all" style="height: 49.2%;"></div>
+          <span class="text-xs font-semibold text-emerald-800 mt-2">Dia 4 ⭐</span>
+          <span class="text-[10px] text-slate-400">08/10</span>
+        </div>
+        <!-- Dia 5 -->
+        <div class="flex flex-col items-center h-full justify-end group">
+          <span class="text-xs font-bold text-slate-700 mb-1">10,51 kg</span>
+          <span class="text-[10px] text-slate-600 font-semibold mb-1">R$ 195,49</span>
+          <div class="w-full max-w-[48px] bg-sky-500 hover:bg-sky-600 rounded-t-xl transition-all" style="height: 62.2%;"></div>
+          <span class="text-xs font-semibold text-slate-800 mt-2">Dia 5</span>
+          <span class="text-[10px] text-slate-400">09/10</span>
+        </div>
+      </div>
+
+      <!-- Texto Obrigatório de Análise e Cautela Metodológica -->
+      <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 flex gap-3 items-start">
+        <span class="text-xl">💡</span>
+        <div class="text-xs md:text-sm text-amber-900 leading-relaxed">
+          <strong>Análise dos dados:</strong> "Do 1º ao 4º dia a sobra caiu cerca de 51%; no 5º dia houve aumento. A amostra é curta e não prova tendência permanente."
+          <p class="mt-1 text-slate-600 text-xs">
+            A presença da equipe no refeitório pode ter gerado um efeito positivo temporário de atenção. Para uma conclusão definitiva, são necessárias medições regulares.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CALCULADORA INTERATIVA "SIMULE VOCÊ MESMA" -->
+    <section id="calculadora" class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 rounded-3xl p-6 md:p-8 border border-emerald-200 card-shadow space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-emerald-100 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-govgreen-700">Ferramenta para a Gestão Escolar</span>
+          <h3 class="text-2xl font-black text-slate-900">Simule você mesma</h3>
+          <p class="text-xs md:text-sm text-slate-600">Altere a sobra diária ou o número de refeições para ver o impacto em tempo real</p>
+        </div>
+        <button onclick="resetarCalculadoraWeb()" class="text-xs font-medium text-slate-600 bg-white hover:bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-300 self-start md:self-auto transition">
+          ↺ Restaurar Padrões
+        </button>
+      </div>
+
+      <!-- Controles de Entrada -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">
+            Sobra diária (kg)
+          </label>
+          <input type="number" id="input-sobra" value="12.32" step="0.1" min="0" oninput="calcularPainelWeb()"
+            class="w-full text-2xl font-black text-slate-900 border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <span class="text-[11px] text-slate-500 block mt-1">Padrão: 12,32 kg (média da escola)</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">
+            Refeições servidas no dia (opcional)
+          </label>
+          <input type="number" id="input-refeicoes" value="250" step="1" min="1" oninput="calcularPainelWeb()"
+            class="w-full text-2xl font-black text-slate-900 border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <span class="text-[11px] text-slate-500 block mt-1">Para calcular sobra por aluno</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">
+            Dias letivos anuais
+          </label>
+          <input type="number" id="input-dias" value="200" step="1" min="1" oninput="calcularPainelWeb()"
+            class="w-full text-2xl font-black text-slate-900 border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <span class="text-[11px] text-slate-500 block mt-1">Padrão nacional: 200 dias</span>
+        </div>
+      </div>
+
+      <!-- Resultados em Tempo Real -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Pratos -->
+        <div class="bg-white p-4 rounded-2xl border border-emerald-100">
+          <span class="text-xs text-slate-500 font-medium">Pratos Desperdiçados / dia</span>
+          <div id="res-pratos" class="text-2xl font-black text-slate-900 mt-1">49,28</div>
+          <span class="text-[11px] text-slate-400">kg ÷ 0,250 kg</span>
+        </div>
+
+        <!-- Prejuízo Diário -->
+        <div class="bg-white p-4 rounded-2xl border border-rose-100">
+          <span class="text-xs text-slate-500 font-medium">Prejuízo Orçamentário / dia</span>
+          <div id="res-prejuizo-dia" class="text-2xl font-black text-rose-600 mt-1">R$ 229,15</div>
+          <span class="text-[11px] text-slate-400">pratos × R$ 4,65</span>
+        </div>
+
+        <!-- Energia Kcal -->
+        <div class="bg-white p-4 rounded-2xl border border-amber-100">
+          <span class="text-xs text-slate-500 font-medium">Energia Desperdiçada / dia</span>
+          <div id="res-energia" class="text-2xl font-black text-amber-600 mt-1">17.248 kcal</div>
+          <span class="text-[11px] text-slate-400">pratos × 350 kcal</span>
+        </div>
+
+        <!-- Sobra por Aluno -->
+        <div class="bg-white p-4 rounded-2xl border border-blue-100">
+          <span class="text-xs text-slate-500 font-medium">Sobra Líquida / Aluno</span>
+          <div id="res-sobra-aluno" class="text-2xl font-black text-blue-700 mt-1">0,049 kg</div>
+          <span class="text-[11px] text-slate-400">kg ÷ refeições servidas</span>
+        </div>
+      </div>
+
+      <!-- Projeção Anual & Custo de Oportunidade Integrado -->
+      <div class="bg-govgreen-900 text-white rounded-2xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-700/60 pb-3">
+          <div>
+            <span class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">Projeção Anual para a Escola</span>
+            <div id="res-projecao-anual" class="text-3xl md:text-4xl font-black text-white mt-0.5">R$ 45.830,40</div>
+            <p class="text-xs text-emerald-200 mt-1">Cenário-base: R$ 229,15/dia × 200 dias letivos</p>
+          </div>
+          <div class="text-right sm:text-right">
+            <span class="text-xs text-emerald-300 block">Equivalente a todo o ano letivo</span>
+            <span class="text-xs bg-emerald-800 text-emerald-100 px-2 py-1 rounded">Estimativa para tomada de decisão</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-white/10 rounded-xl p-3 border border-white/10">
+            <div class="flex items-center gap-2 text-emerald-300 text-xs font-semibold">
+              <span>💻</span> Equivalente em Computadores (R$ 2.500 cada):
+            </div>
+            <div id="res-pc" class="text-xl font-bold text-white mt-1">~18 computadores</div>
+            <span class="text-[10px] text-emerald-200">Modernização de laboratório de informática</span>
+          </div>
+
+          <div class="bg-white/10 rounded-xl p-3 border border-white/10">
+            <div class="flex items-center gap-2 text-emerald-300 text-xs font-semibold">
+              <span>📽️</span> Equivalente em Projetores (R$ 1.000 cada):
+            </div>
+            <div id="res-proj" class="text-xl font-bold text-white mt-1">~45 projetores</div>
+            <span class="text-[10px] text-emerald-200">1 projetor para praticamente todas as salas da escola</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. O QUE O DESPERDÍCIO DEIXA DE COMPRAR -->
+    <section id="oportunidade" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 card-shadow space-y-4">
+      <div class="border-b border-slate-100 pb-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-govblue-700">Custo de Oportunidade</span>
+        <h3 class="text-xl md:text-2xl font-bold text-slate-900">O que o desperdício deixa de comprar</h3>
+        <p class="text-xs md:text-sm text-slate-500">Visualizando o valor anual estimado de <strong>R$ 45.830,40</strong> em equipamentos para os alunos</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Cartão Computadores -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex items-start gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-3xl shrink-0">
+            💻
+          </div>
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">R$ 2.500 / unidade</span>
+            <div class="text-3xl font-black text-slate-900">18 Computadores</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Equipamento completo para equipar ou renovar um laboratório de informática para aulas digitais e pesquisas dos estudantes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Cartão Projetores -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex items-start gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl shrink-0">
+            📽️
+          </div>
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">R$ 1.000 / unidade</span>
+            <div class="text-3xl font-black text-slate-900">45 Projetores</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Suficiente para instalar recursos multimídia em quase todas as salas de aula da escola, dinamizando as aulas dos professores.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ressalva Obrigatória -->
+      <div class="bg-amber-50 border border-amber-300 rounded-xl p-3.5 text-xs text-amber-900 flex items-center gap-2">
+        <span class="text-base">📌</span>
+        <span><strong>Ressalva importante:</strong> "Estimativa baseada em preços de referência, não demonstra disponibilidade orçamentária." Os recursos da merenda têm destinação vinculada por lei.</span>
+      </div>
+    </section>
+
+    <!-- 6. INDICADORES DE ACOMPANHAMENTO (KPIS) & MINI-FORMULÁRIO -->
+    <section id="kpis" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 card-shadow space-y-6">
+      <div class="border-b border-slate-100 pb-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-govgreen-700">Gestão Nutricional</span>
+        <h3 class="text-xl md:text-2xl font-bold text-slate-900">Indicadores de Acompanhamento (KPIs)</h3>
+        <p class="text-xs md:text-sm text-slate-500">Métricas simples e práticas para a equipe escolar monitorar semanalmente</p>
+      </div>
+
+      <!-- 3 Cartões de Fórmulas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- KPI 1 -->
+        <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+            <h4 class="font-bold text-sm text-slate-900">Taxa de Redução da Sobra Limpa (%)</h4>
+          </div>
+          <div class="bg-white rounded-lg p-2.5 font-mono text-xs text-emerald-900 border border-emerald-100">
+            ((Sobra Anterior − Sobra Atual) ÷ Sobra Anterior) × 100
+          </div>
+          <p class="text-xs text-slate-600">
+            Mede a evolução positiva. Exemplo do 1º ao 4º dia: <strong>queda de 50,8%</strong>.
+          </p>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-4 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+            <h4 class="font-bold text-sm text-slate-900">Índice de Sobra Líquida / Aluno</h4>
+          </div>
+          <div class="bg-white rounded-lg p-2.5 font-mono text-xs text-blue-900 border border-blue-100">
+            Sobra Total (kg) ÷ Refeições Servidas
+          </div>
+          <p class="text-xs text-slate-600">
+            Indica a sobra individual. Meta ideal: menos de <strong>0,030 kg/aluno</strong> (30g).
+          </p>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-amber-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+            <h4 class="font-bold text-sm text-slate-900">Aderência ao Target Calórico</h4>
+          </div>
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between bg-white px-2 py-1 rounded border border-amber-100">
+              <span class="font-medium">Anos Iniciais:</span>
+              <strong class="text-amber-800">350 kcal</strong>
+            </div>
+            <div class="flex justify-between bg-white px-2 py-1 rounded border border-amber-100">
+              <span class="font-medium">Anos Finais:</span>
+              <strong class="text-amber-800">470 kcal</strong>
+            </div>
+            <div class="flex justify-between bg-white px-2 py-1 rounded border border-amber-100">
+              <span class="font-medium">Ensino Médio:</span>
+              <strong class="text-amber-800">540 kcal</strong>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-500">Ajuda as nutricionistas a balancear porções por faixa de idade.</p>
+        </div>
+      </div>
+
+      <!-- Mini-Formulário para Lançamento de Novos Dias (Dados na Sessão) -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">📝</span>
+            <h4 class="font-bold text-sm text-slate-900">Registrar Novo Dia de Pesagem (Armazenado na Sessão)</h4>
+          </div>
+          <span class="text-[11px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-medium">Uso interno da escola</span>
+        </div>
+
+        <form id="form-novo-dia" onsubmit="adicionarDiaWeb(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <input type="text" id="novo-data" placeholder="Ex: 15/10 (Qua)" required
+            class="text-xs bg-white border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <input type="number" id="novo-kg" step="0.01" min="0" placeholder="Sobra limpa (kg)" required
+            class="text-xs bg-white border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <input type="number" id="novo-refeicoes" min="1" placeholder="Refeições servidas" required
+            class="text-xs bg-white border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <button type="submit"
+            class="text-xs font-bold text-white bg-govgreen-700 hover:bg-govgreen-800 rounded-xl px-4 py-2 transition shadow-sm">
+            + Adicionar Pesagem
+          </button>
+        </form>
+
+        <!-- Tabela de Registros da Sessão -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left text-slate-600">
+            <thead class="text-[11px] text-slate-500 uppercase bg-slate-100 border-b border-slate-200">
+              <tr>
+                <th class="px-3 py-2">Data</th>
+                <th class="px-3 py-2">Sobra (kg)</th>
+                <th class="px-3 py-2">Refeições</th>
+                <th class="px-3 py-2">Pratos Eq.</th>
+                <th class="px-3 py-2">Perda Est.</th>
+                <th class="px-3 py-2">Sobra/Aluno</th>
+                <th class="px-3 py-2 text-right">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-novos-dias" class="divide-y divide-slate-200 bg-white">
+              <!-- Inseridos dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ESCALANDO A IDEIA (100 ESCOLAS) -->
+    <section id="escala" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 card-shadow space-y-4">
+      <div class="border-b border-slate-100 pb-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Visão de Rede Estadual</span>
+        <h3 class="text-xl md:text-2xl font-bold text-slate-900">Escalando a ideia: O que representaria em 100 escolas?</h3>
+        <p class="text-xs md:text-sm text-slate-500">Simulação do impacto agregado se a metodologia for adotada pela rede de ensino</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Cenário Baixo -->
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-2">
+          <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Cenário Baixo</span>
+          <div class="text-2xl md:text-3xl font-black text-slate-800">R$ 3,50 mi <span class="text-xs font-medium text-slate-500">/ ano</span></div>
+          <p class="text-xs text-slate-600">
+            Considera rápida adequação de cardápio e redução de desperdício para menos de 9 kg/dia por escola.
+          </p>
+        </div>
+
+        <!-- Cenário Base (Destaque) -->
+        <div class="bg-govgreen-50 rounded-2xl p-5 border-2 border-govgreen-600 space-y-2 relative">
+          <span class="absolute -top-3 right-4 text-[10px] bg-govgreen-700 text-white font-bold px-2 py-0.5 rounded-full uppercase">Cenário Base</span>
+          <span class="text-xs font-bold text-govgreen-800 uppercase tracking-wide">Cenário Médio (Base)</span>
+          <div class="text-2xl md:text-3xl font-black text-govgreen-800">R$ 4,58 mi <span class="text-xs font-medium text-slate-500">/ ano</span></div>
+          <p class="text-xs text-govgreen-950">
+            Extrapolação direta da média da E.E. Professor Morais (R$ 45.830,40 × 100 escolas da rede).
+          </p>
+        </div>
+
+        <!-- Cenário Alto -->
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-2">
+          <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Cenário Alto</span>
+          <div class="text-2xl md:text-3xl font-black text-slate-800">R$ 6,29 mi <span class="text-xs font-medium text-slate-500">/ ano</span></div>
+          <p class="text-xs text-slate-600">
+            Cenário com escolas de porte superior ou maior descompasso entre alunos matriculados e presentes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Aviso Obrigatório -->
+      <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-rose-900 flex items-center gap-2">
+        <span class="text-base">⚠️</span>
+        <strong>Aviso metodológico:</strong> "Simulações, não perdas comprovadas. Servem como tese de impacto para justificar políticas públicas de monitoramento contínuo."
+      </div>
+    </section>
+
+    <!-- 8. ODS E CONTROLE SOCIAL -->
+    <section id="ods" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 card-shadow space-y-6">
+      <div class="border-b border-slate-100 pb-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-govgreen-700">Alinhamento Global e Controle Social</span>
+        <h3 class="text-xl md:text-2xl font-bold text-slate-900">ODS, PNAE e Cidadania Ativa</h3>
+        <p class="text-xs md:text-sm text-slate-500">Como a auditoria atua em conformidade com as diretrizes do PNAE/FNDE e os Objetivos de Desenvolvimento Sustentável</p>
+      </div>
+
+      <!-- Tabela Didática dos ODS -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="text-slate-500 uppercase bg-slate-50 border-b border-slate-200 text-[11px]">
+            <tr>
+              <th class="px-4 py-3">ODS & Meta</th>
+              <th class="px-4 py-3">Descrição Oficial da Meta</th>
+              <th class="px-4 py-3">Como o Projeto Contribui</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#BF8B2E] mr-1.5"></span>
+                ODS 12 (Meta 12.3)
+              </td>
+              <td class="px-4 py-3 text-slate-600">Reduzir pela metade o desperdício de alimentos per capita mundial até 2030.</td>
+              <td class="px-4 py-3 text-emerald-800 font-medium">Diagnóstico direto da sobra no prato e refeitório da escola.</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#DDA63A] mr-1.5"></span>
+                ODS 2 (Meta 2.1)
+              </td>
+              <td class="px-4 py-3 text-slate-600">Garantir acesso a alimentos seguros, nutritivos e suficientes durante todo o ano.</td>
+              <td class="px-4 py-3 text-emerald-800 font-medium">Evita que refeições adequadas sejam descartadas, protegendo a segurança alimentar.</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#BF8B2E] mr-1.5"></span>
+                ODS 12 (Meta 12.7)
+              </td>
+              <td class="px-4 py-3 text-slate-600">Promover práticas de compras públicas sustentáveis conforme prioridades nacionais.</td>
+              <td class="px-4 py-3 text-emerald-800 font-medium">Melhora o planejamento de aquisições de insumos da merenda escolar.</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00689D] mr-1.5"></span>
+                ODS 16 (Meta 16.6)
+              </td>
+              <td class="px-4 py-3 text-slate-600">Desenvolver instituições eficazes, responsáveis e transparentes em todos os níveis.</td>
+              <td class="px-4 py-3 text-emerald-800 font-medium">Painel aberto com dados públicos para a direção, comunidade e conselhos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Destaque PNAE / FNDE e CAE -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg">🥗</span>
+            <h4 class="font-bold text-sm text-emerald-950">Diretrizes do PNAE / FNDE</h4>
+          </div>
+          <p class="text-xs text-emerald-900 leading-relaxed">
+            A Lei Federal nº 11.947/2009 e normas do FNDE estabelecem que no <strong>mínimo 75% dos recursos federais</strong> devem ser investidos em alimentos <em>in natura</em> ou minimamente processados. Combater o desperdício protege a qualidade desse cardápio fresco e regional.
+          </p>
+        </div>
+
+        <div class="bg-blue-50 rounded-2xl p-4 border border-blue-200">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg">🏛️</span>
+            <h4 class="font-bold text-sm text-blue-950">Conselho de Alimentação Escolar (CAE)</h4>
+          </div>
+          <p class="text-xs text-blue-900 leading-relaxed">
+            O <strong>CAE</strong> é o órgão colegiado de controle social responsável por fiscalizar a execução da merenda escolar. O Painel Cidadão fornece dados técnicos auditados para subsidiar as reuniões ordinárias do conselho e apoiar a direção.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PRÓXIMOS PASSOS -->
+    <section id="passos" class="bg-gradient-to-r from-govblue-900 to-govgreen-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-4">
+      <div class="border-b border-white/20 pb-3">
+        <span class="text-xs font-semibold text-emerald-300 uppercase tracking-wider">Ações Práticas Recomendadas</span>
+        <h3 class="text-xl md:text-2xl font-bold text-white">Próximos Passos para a Escola</h3>
+        <p class="text-xs md:text-sm text-emerald-100">Como transformar estes dados em melhoria contínua para a comunidade escolar</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10 space-y-2">
+          <div class="text-2xl">👩‍⚕️</div>
+          <h4 class="font-bold text-sm text-white">1. Reunião Técnica com PNAE/BH</h4>
+          <p class="text-xs text-emerald-100 leading-relaxed">
+            Apresentar os relatórios às nutricionistas responsáveis pelo planejamento de cardápio da regional para calibrar quantidades e ingredientes com maior aceitação.
+          </p>
+        </div>
+
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10 space-y-2">
+          <div class="text-2xl">📏</div>
+          <h4 class="font-bold text-sm text-white">2. Ajuste de Porções por Faixa Etária</h4>
+          <p class="text-xs text-emerald-100 leading-relaxed">
+            Diferenciar porções nos pratos entre Anos Iniciais (350 kcal), Anos Finais (470 kcal) e Ensino Médio (540 kcal), permitindo repeteco sem gerar sobras.
+          </p>
+        </div>
+
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10 space-y-2">
+          <div class="text-2xl">🏫</div>
+          <h4 class="font-bold text-sm text-white">3. Replicação na Rede Estadual</h4>
+          <p class="text-xs text-emerald-100 leading-relaxed">
+            Compartilhar a cartilha e a rotina de "Atrito Zero" com outras escolas da Superintendência Regional de Ensino, fortalecendo a rede pública de Minas Gerais.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Obrigatório -->
+  <footer class="mt-16 bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <p class="font-bold text-slate-700 text-sm">
+        PUC Minas · ICEG · Ciências Contábeis · TEI 2026/2 · Fonte: TEI – Projeto Escola (2026)
+      </p>
+      <p class="text-[11px] text-slate-400">
+        Trabalho Extensionista Interdisciplinar | "Painel Cidadão: Governança Pública e Eficiência Nutricional no Combate ao Desperdício Escolar à luz dos ODS 2 e 12"
+      </p>
+      <p class="text-[11px] text-slate-400">
+        Escola Estadual Professor Morais · Belo Horizonte / MG
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal da Equipe PUC Minas -->
+  <div id="modal-equipe" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900">Equipe de Ciências Contábeis</h3>
+          <p class="text-xs text-slate-500">PUC Minas · ICEG · TEI 2026/2</p>
+        </div>
+        <button onclick="document.getElementById('modal-equipe').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-lg p-1">✕</button>
+      </div>
+
+      <div class="space-y-2 text-xs text-slate-700">
+        <p class="font-semibold text-emerald-800">Acadêmicos Pesquisadores:</p>
+        <ul class="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <li class="flex items-center gap-2"><span>👤</span> Erick Marques Queiroz</li>
+          <li class="flex items-center gap-2"><span>👤</span> Geovana Cristina Ferreira de Jesus</li>
+          <li class="flex items-center gap-2"><span>👤</span> Lucas Alves Nery</li>
+          <li class="flex items-center gap-2"><span>👤</span> Lucas Henrique Félix de Barros</li>
+          <li class="flex items-center gap-2"><span>👤</span> Marcelo Carvalho Couto de Souza</li>
+          <li class="flex items-center gap-2"><span>👤</span> Sarah Gabriela Vieira Madeira</li>
+        </ul>
+      </div>
+
+      <div class="bg-govgreen-50 p-3 rounded-xl border border-govgreen-200 text-xs text-govgreen-950">
+        <strong>Projeto:</strong> "Painel Cidadão: Governança Pública e Eficiência Nutricional no Combate ao Desperdício Escolar à luz dos ODS 2 e 12"
+      </div>
+
+      <button onclick="document.getElementById('modal-equipe').classList.add('hidden')" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+        Fechar
+      </button>
+    </div>
+  </div>
+
+  <!-- Lógica JavaScript da Calculadora e Formulário Interativo -->
+  <script>
+    function formatarMoeda(val) {
+      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function formatarNumero(val, casas = 2) {
+      return val.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
+    }
+
+    function calcularPainelWeb() {
+      const sobra = parseFloat(document.getElementById('input-sobra').value) || 0;
+      const refeicoes = parseFloat(document.getElementById('input-refeicoes').value) || 0;
+      const dias = parseFloat(document.getElementById('input-dias').value) || 200;
+
+      const pratos = sobra / 0.250;
+      const prejuizoDia = pratos * 4.65;
+      const energia = pratos * 350;
+      const sobraAluno = refeicoes > 0 ? (sobra / refeicoes) : 0;
+      const projecaoAnual = prejuizoDia * dias;
+      const computadores = Math.floor(projecaoAnual / 2500);
+      const projetores = Math.floor(projecaoAnual / 1000);
+
+      document.getElementById('res-pratos').textContent = formatarNumero(pratos, 2);
+      document.getElementById('res-prejuizo-dia').textContent = formatarMoeda(prejuizoDia);
+      document.getElementById('res-energia').textContent = Math.round(energia).toLocaleString('pt-BR') + ' kcal';
+      document.getElementById('res-sobra-aluno').textContent = formatarNumero(sobraAluno, 3) + ' kg';
+      document.getElementById('res-projecao-anual').textContent = formatarMoeda(projecaoAnual);
+      document.getElementById('res-pc').textContent = '~' + computadores + ' computadores';
+      document.getElementById('res-proj').textContent = '~' + projetores + ' projetores';
+    }
+
+    function resetarCalculadoraWeb() {
+      document.getElementById('input-sobra').value = '12.32';
+      document.getElementById('input-refeicoes').value = '250';
+      document.getElementById('input-dias').value = '200';
+      calcularPainelWeb();
+    }
+
+    // Mini-Formulário em Memória (Sessão)
+    const registrosSessao = [
+      { id: '1', data: '13/10 (Seg)', kg: 9.20, ref: 240 },
+      { id: '2', data: '14/10 (Ter)', kg: 8.80, ref: 255 }
+    ];
+
+    function renderTabelaNovosDias() {
+      const tbody = document.getElementById('tabela-novos-dias');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      registrosSessao.forEach((reg, idx) => {
+        const pratos = reg.kg / 0.250;
+        const perda = pratos * 4.65;
+        const sobraAluno = reg.ref > 0 ? (reg.kg / reg.ref) : 0;
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 transition';
+        tr.innerHTML = `
+          <td class="px-3 py-2 font-medium text-slate-800">${reg.data}</td>
+          <td class="px-3 py-2 font-bold text-emerald-700">${formatarNumero(reg.kg, 2)} kg</td>
+          <td class="px-3 py-2">${reg.ref}</td>
+          <td class="px-3 py-2">${formatarNumero(pratos, 1)}</td>
+          <td class="px-3 py-2 text-rose-600 font-semibold">${formatarMoeda(perda)}</td>
+          <td class="px-3 py-2">${formatarNumero(sobraAluno, 3)} kg</td>
+          <td class="px-3 py-2 text-right">
+            <button onclick="removerDiaWeb(${idx})" class="text-rose-500 hover:text-rose-700 font-bold px-1.5 py-0.5 rounded">✕</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function adicionarDiaWeb(e) {
+      e.preventDefault();
+      const data = document.getElementById('novo-data').value;
+      const kg = parseFloat(document.getElementById('novo-kg').value) || 0;
+      const ref = parseInt(document.getElementById('novo-refeicoes').value) || 0;
+
+      if (kg > 0) {
+        registrosSessao.unshift({ id: String(Date.now()), data, kg, ref });
+        renderTabelaNovosDias();
+        document.getElementById('form-novo-dia').reset();
+      }
+    }
+
+    function removerDiaWeb(idx) {
+      registrosSessao.splice(idx, 1);
+      renderTabelaNovosDias();
+    }
+
+    // Inicializar cálculos
+    document.addEventListener('DOMContentLoaded', () => {
+      calcularPainelWeb();
+      renderTabelaNovosDias();
+    });
+  </script>
+</body>
+</html>

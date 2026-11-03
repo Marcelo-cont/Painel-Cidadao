@@ -1,0 +1,6 @@
+{
+  "name": "Painel Cidadão",
+  "description": "Painel Cidadão: Governança Pública e Eficiência Nutricional no Combate ao Desperdício Escolar na E. E. Professor Morais (PUC Minas).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
